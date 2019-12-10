@@ -5,7 +5,8 @@ services:
       context: ./
       dockerfile: docker/${APP_ENV}.dockerfile
     ports:
-      - '${PORT}:${PORT}'
+      - ${PORT}:${PORT}
+      - 2345:2345
     volumes:
       - .:/go/src/app
     networks:
