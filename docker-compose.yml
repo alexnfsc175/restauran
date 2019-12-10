@@ -1,0 +1,40 @@
+version: '3.5'
+services:
+  golang-api-dev:
+    build:
+      context: ./
+      dockerfile: docker/${APP_ENV}.dockerfile
+    ports:
+      - '${PORT}:${PORT}'
+    volumes:
+      - .:/go/src/app
+    networks:
+      - backend
+    container_name: golang-api-${APP_ENV}
+
+  golang-database:
+    image: postgres:11.4-alpine
+    restart: always
+    volumes:
+      - pgdata3:/var/lib/postgresql/data
+    networks:
+      - backend
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - 54323:5432
+    container_name: golang-database
+
+volumes:
+  pgdata3:
+    name: pgdata3
+
+networks:
+  backend:
+    name: restaurant-backend
+    driver: bridge
+    labels:
+      - 'com.example.description=Todo transaction network'
+      - 'com.example.department=Finance'

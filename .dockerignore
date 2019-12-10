@@ -1,0 +1,16 @@
+Dockerfile
+.DS_Store
+.vscode
+vendor
+
+*.md
+
+**.git
+.idea
+**.gitignore
+**.gitattributes
+**.sass-cache
+
+# To prevent storing dev/temporary container data
+*.csv
+tmp
